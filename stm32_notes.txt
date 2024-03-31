@@ -1,0 +1,35 @@
+## Setup  
+
+# STM32Cube
+https://www.youtube.com/watch?v=FkqQpBqkSns
+
+To be free of the STM32CubeIDE, make sure to stick to the STM32CubeMX application for code generation.
+
+Steps:
+After selecting the chip go to Project Manager, and set Toolchain/IDE to Makefile
+Then, go to Code Generator and select "Copy only the necessary Library Files"
+
+# Neovim + coc:
+
+https://versbinarii.gitlab.io/blog/posts/configuring-stm32cubeide-for-vim/
+
+To make sure we can build the project such that Neovim can provide the library functionality through coc.nvim,
+build from the root directory of your project with:
+
+compiledb -o ./compile_commands.json make -j8
+
+Now, there should be a compile_commands.json alongside the build directory of within the root dir.
+
+# St-Link
+
+After installing st-link, you can flash to your system with:
+
+st-flash --reset write build/bare-metal.bin 0x8000000
+
+The address will correspond to the first available address in the flash memory of your chip
+This can be found by going to the reference manual of your chip and going to the Embedded Flash Memory section
+
+STM32F030: 0x8000000
+
+
+
