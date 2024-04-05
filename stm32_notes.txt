@@ -32,4 +32,18 @@ This can be found by going to the reference manual of your chip and going to the
 STM32F030: 0x8000000
 
 
+# GDB
+Install openocd and gdb-multiarch
+
+Run openocd with:
+openocd -f /usr/share/openocd/scripts/interface/stlink.cfg -f /usr/share/openocd/scripts/target/stm32f0x.cfg
+
+This runs a server that allows a bridge between local gdb and the process running on the mcu
+To connect to it, run
+
+gdb-multiarch ./build/bare-metal.elf -tui
+
+to begin gdb. And run the following to connect to the openocd server:
+
+target extend-remote localhost:3333
 
